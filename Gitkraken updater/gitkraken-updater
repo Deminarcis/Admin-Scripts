@@ -1,0 +1,27 @@
+#!/bin/bash
+
+CACHEDIR="/var/cache/gitkraken-updater";
+mkdir -p "$CACHEDIR"
+cp "gitkraken.svg" "$CACHEDIR"
+cd "$CACHEDIR"
+
+#detecting if the last download is a week old so old files are not kept
+if [[ $(( $(date +%s) - $(date +%s -r "gitkraken-amd64.tar.gz") )) -le 604800 ]]; then
+    rm "gitkraken-amd64.tar.gz"
+fi
+
+URL="https://release.gitkraken.com/linux/gitkraken-amd64.tar.gz"
+FILE=${URL##*/}
+
+wget -c "$URL" -O "$FILE"
+
+if [[ ! -f "$FILE" ]]; then
+	exit 1
+fi
+
+tar -xzf "$FILE" -C "/opt/"
+
+ln -sf "/opt/gitkraken/gitkraken" "/usr/bin/gitkraken"
+
+cp "gitkraken.svg" "/usr/share/icons/hicolor/scalable/apps/"
+gtk-update-icon-cache -f -t /usr/share/icons/hicolor
