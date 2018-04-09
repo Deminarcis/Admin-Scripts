@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os
 
-print("This script installs Papirus Icon theme and will update the theme if it is already present")
 workingdir = "/tmp/"
 os.system("cd %s" % workingdir)
 os.system("wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-icon-theme/master/install-papirus-root.sh | sh")

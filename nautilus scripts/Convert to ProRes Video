@@ -1,0 +1,3 @@
+#!/bin/bash
+ffmpeg -i "$@" -c:v prores -c:a pcm_s16le "$@".mov
+

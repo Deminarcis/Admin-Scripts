@@ -1,0 +1,2 @@
+#!/bin/bash
+ffmpeg -i "$@" -c:v h264 -c:a aac "$@".mp4

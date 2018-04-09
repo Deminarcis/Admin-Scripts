@@ -1,0 +1,38 @@
+#!/bin/bash
+
+#This is a Pop! Theme installer because I'm lazy
+
+# Install dependencies
+sudo dnf install libsass sassc inkscape optipng git -y
+# Remove old versions
+sudo rm -rf /usr/share/themes/{Pop,Pop-Eta,Pop-Nokto,Pop-Nokto-Eta}
+rm -rf ~/.local/share/themes/{Pop,Pop-Eta,Pop-Nokto,Pop-Nokto-Eta}
+rm -rf ~/.themes/{Pop,Pop-Eta,Pop-Nokto,Pop-Nokto-Eta}
+sudo rm -rf /usr/share/icons/Pop
+rm -rf ~/git/Pop
+cd ~
+mkdir -p git/Pop
+# Clone the repo
+cd ~/git/Pop
+git clone https://github.com/pop-os/gtk-theme.git
+cd gtk-theme
+make
+sudo make install
+# Make sure we have fonts
+cd ~/git/Pop
+git clone https://github.com/pop-os/fonts.git
+cd fonts
+sudo make install
+# Get the icons too
+cd ~/git/Pop
+git clone https://github.com/pop-os/icon-theme.git
+cd icon-theme
+sudo make install
+sudo make post-install
+# This script can be used to update as well
+#Font recommendations
+#Window Titles: Fira Sans SemiBold 10
+#Interface: Fira Sans Book 10
+#Documents: Roboto Slab Regular 11
+#Monospace: Monaco 8.5 or 9
+

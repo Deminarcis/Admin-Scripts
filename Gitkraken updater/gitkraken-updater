@@ -19,7 +19,7 @@ if [[ ! -f "$FILE" ]]; then
 	exit 1
 fi
 
-tar -xzf "$FILE" -C "/opt/"
+tar -xvf "$FILE" -C "/opt/"
 
 ln -sf "/opt/gitkraken/gitkraken" "/usr/bin/gitkraken"
 
